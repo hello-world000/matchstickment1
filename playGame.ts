@@ -4,7 +4,7 @@ namespace playGame{
 
     //%block
     //%group="游戏初始化"
-    //%blockId=chooseCharacter block="玩家%kind=kind 选择人物 %index=index"
+    //%blockId=chooseCharacter block="玩家%kind 选择人物 %index"
     //%kind.defl=myGame.PlayerKind.Player1
     //%index.defl=0
     //%blockSetVariable="player"
