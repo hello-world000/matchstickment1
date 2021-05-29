@@ -1751,11 +1751,15 @@ namespace myGame{
             else{
                 this.laspres = 1
             }
+            this.mySprite.setFlag(SpriteFlag.Ghost, true)
+            this.mySprite.setFlag(SpriteFlag.Invisible, true)
         }
         walkInterval = 200
         startcontroll(){
             this.statusbar = statusbars.create(50, 4, StatusBarKind.Health)
             this.statusbar.positionDirection(CollisionDirection.Top)
+            this.mySprite.setFlag(SpriteFlag.Ghost, false)
+            this.mySprite.setFlag(SpriteFlag.Invisible, false)
             if(this.player == controller.player1){
                 this.statusbar.setOffsetPadding(-53, 0)
             }
@@ -2235,6 +2239,9 @@ namespace myGame{
     //%group="导出人物"
     //%blockId=exportCharacter block="导出人物$p=variables_get(player) 命名为%name"
     export function exportCharacter(p: Character, name: string){
+        if(playGame.characters == undefined){
+            playGame.characters = []
+        }
         playGame.characters.push({character: p, name: name})
     }
 

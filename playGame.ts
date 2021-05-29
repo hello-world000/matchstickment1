@@ -1,6 +1,6 @@
 // 在此处添加您的代码
 namespace playGame{
-    export let characters :({character: myGame.Character, name: string})[] = []
+    export let characters :({character: myGame.Character, name: string})[]
 
     //%block
     //%group="游戏初始化"
@@ -10,16 +10,8 @@ namespace playGame{
     //%blockSetVariable="player"
     //%weight=98
     export function chooseCharacter(kind: myGame.PlayerKind, index: number) : myGame.Character{
+        myGame.setPlayer(characters[index].character, kind)
         return characters[index].character
-    }
-
-    //%block
-    //%group="游戏初始化"
-    //%blockId=setPlayer block="设置人物 %p=variables_get(player) 归属玩家 %kind=kind"
-    //%kind.defl=myGame.PlayerKind.Player1
-    //%weight=97
-    export function setPlayer(p: myGame.Character, kind: myGame.PlayerKind){
-        myGame.setPlayer(p, kind)
     }
 
     //%block
