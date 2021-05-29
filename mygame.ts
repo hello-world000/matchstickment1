@@ -1756,7 +1756,7 @@ namespace myGame{
             this.mySprite.setFlag(SpriteFlag.Invisible, true)
             this.statusbar = statusbars.create(50, 4, StatusBarKind.Health)
             this.statusbar.positionDirection(CollisionDirection.Top)
-            this.statusbar.setOffsetPadding(-66666, 66666)
+            this.statusbar.setOffsetPadding(-66666, 0)
         }
         walkInterval = 200
         startcontroll(){
