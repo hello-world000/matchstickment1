@@ -9,7 +9,6 @@ namespace playGame{
     //%index.defl=0
     //%blockSetVariable="player"
     //%weight=98
-    //%afterOnStart=true
     export function chooseCharacter(kind: myGame.PlayerKind, index: number) : myGame.Character{
         if(characters == null || index >= characters.length){
             return null

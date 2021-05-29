@@ -1754,11 +1754,13 @@ namespace myGame{
             }
             this.mySprite.setFlag(SpriteFlag.Ghost, true)
             this.mySprite.setFlag(SpriteFlag.Invisible, true)
+            this.statusbar = statusbars.create(50, 4, StatusBarKind.Health)
+            this.statusbar.positionDirection(CollisionDirection.Top)
+            this.statusbar.setOffsetPadding(-66666, 66666)
         }
         walkInterval = 200
         startcontroll(){
-            this.statusbar = statusbars.create(50, 4, StatusBarKind.Health)
-            this.statusbar.positionDirection(CollisionDirection.Top)
+            
             this.mySprite.setFlag(SpriteFlag.Ghost, false)
             this.mySprite.setFlag(SpriteFlag.Invisible, false)
             if(this.player == controller.player1){
