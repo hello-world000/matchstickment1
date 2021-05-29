@@ -15,8 +15,8 @@ namespace test1{
     let angel = 0
     let y = 0
     let x = 0
-    let projectile: myGame.wave = null
     let time = 0
+    let projectile: myGame.wave = null
     let mySprite = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -266,7 +266,6 @@ namespace test1{
     myGame.defalutSkill(player1)
     myGame.defalutSkill(player2)
     myGame.setAbility(player2, myGame.abilityKind.def, 0.1)
-    myGame.overlap(player1, player2)
     let action = myGame.createAction()
     let action2 = myGame.createAction()
     let action3 = myGame.createAction()
