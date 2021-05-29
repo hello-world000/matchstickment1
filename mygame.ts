@@ -1745,19 +1745,23 @@ namespace myGame{
     //=================== 初始化 ===================
         statusbar: StatusBarSprite
         constructor(public mySprite: Sprite, public player: controller.Controller, public bulletkind: number){
-            this.statusbar = statusbars.create(50, 4, StatusBarKind.Health)
-            this.statusbar.positionDirection(CollisionDirection.Top)
             if(player == controller.player1){
-                this.statusbar.setOffsetPadding(-53, 0)
                 this.laspres = 2
             }
             else{
-                this.statusbar.setOffsetPadding(53, 0)
                 this.laspres = 1
             }
         }
         walkInterval = 200
         startcontroll(){
+            this.statusbar = statusbars.create(50, 4, StatusBarKind.Health)
+            this.statusbar.positionDirection(CollisionDirection.Top)
+            if(this.player == controller.player1){
+                this.statusbar.setOffsetPadding(-53, 0)
+            }
+            else{
+                this.statusbar.setOffsetPadding(53, 0)
+            }
             let f = -1 //0: right, 1: left, -1: stop
             let wimg = <Image[]>[]
             for(let i = 0; i < this.walkimg.length; ++i){
