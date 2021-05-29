@@ -26,6 +26,7 @@ namespace playGame{
     //%group="游戏初始化"
     //%blockId=overlap block="开始游戏 %p1=variables_get(player1) %p2=variables_get(player2)"
     //%weight=90
+    //%afterOnStart=true
     export function overlap(p1: myGame.Character, p2: myGame.Character){
         myGame.overlap(p1, p2)
     }
