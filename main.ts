@@ -614,7 +614,7 @@ namespace test1{
     myGame.setAction(action9, function (player3, projectile) {
         myGame.aimedshot(player3, projectile)
     })
-    let playerA = playGame.chooseCharacter(myGame.PlayerKind.Player1, 0)
-    let playerB = playGame.chooseCharacter(myGame.PlayerKind.Player2, 0)
-    myGame.overlap(playerA, playerB)
+    // let playerA = playGame.chooseCharacter(myGame.PlayerKind.Player1, 0)
+    // let playerB = playGame.chooseCharacter(myGame.PlayerKind.Player2, 0)
+    // myGame.overlap(playerA, playerB)
 }
