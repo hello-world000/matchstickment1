@@ -1760,7 +1760,6 @@ namespace myGame{
         }
         walkInterval = 200
         startcontroll(){
-            
             this.mySprite.setFlag(SpriteFlag.Ghost, false)
             this.mySprite.setFlag(SpriteFlag.Invisible, false)
             if(this.player == controller.player1){
