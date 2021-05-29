@@ -221,7 +221,7 @@ namespace myGame{
         p2.startcontroll()
         p1.setEnemy(p2.mySprite)
         p2.setEnemy(p1.mySprite)
-
+        p1.mySprite.ay = p2.mySprite.ay = g
         sprites.onOverlap(SpriteKind.p1atk, SpriteKind.p2body, function (sprite, otherSprite) {
             p2.overlap(sprite, otherSprite)
         })
