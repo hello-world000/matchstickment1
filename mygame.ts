@@ -5,6 +5,7 @@ namespace SpriteKind {
     export const p2body = SpriteKind.create()
 }
 namespace myGame{
+    export let g = 200
     export enum PlayerKind{
         Player1,
         Player2
@@ -220,6 +221,7 @@ namespace myGame{
         p2.startcontroll()
         p1.setEnemy(p2.mySprite)
         p2.setEnemy(p1.mySprite)
+
         sprites.onOverlap(SpriteKind.p1atk, SpriteKind.p2body, function (sprite, otherSprite) {
             p2.overlap(sprite, otherSprite)
         })
@@ -227,8 +229,6 @@ namespace myGame{
             p1.overlap(sprite, otherSprite)
         })
     }
-
-    export let g = 200
 
 //=================== 自定义技能效果 ===================
     export class callback{
