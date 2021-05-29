@@ -199,14 +199,14 @@ namespace myGame{
             p.mySprite.x = 5
             p.mySprite.setKind(SpriteKind.p1body)
             p.bulletkind = SpriteKind.p1atk
-            p.statusbar.setOffsetPadding(-53, 0)
+            p.startusbarsOffset = -53
             p.laspres = 2
         }
         else{
             p.mySprite.x = 155
             p.mySprite.setKind(SpriteKind.p2body)
             p.bulletkind = SpriteKind.p2atk
-            p.statusbar.setOffsetPadding(53, 0)
+            p.startusbarsOffset = 53
             p.laspres = 1
         }
     }
@@ -1759,15 +1759,11 @@ namespace myGame{
             this.statusbar.setOffsetPadding(-66666, 0)
         }
         walkInterval = 200
+        startusbarsOffset = 53
         startcontroll(){
             this.mySprite.setFlag(SpriteFlag.Ghost, false)
             this.mySprite.setFlag(SpriteFlag.Invisible, false)
-            if(this.player == controller.player1){
-                this.statusbar.setOffsetPadding(-53, 0)
-            }
-            else{
-                this.statusbar.setOffsetPadding(53, 0)
-            }
+            this.statusbar.setOffsetPadding(this.startusbarsOffset, 0)
             let f = -1 //0: right, 1: left, -1: stop
             let wimg = <Image[]>[]
             for(let i = 0; i < this.walkimg.length; ++i){
