@@ -15,8 +15,8 @@ namespace test1{
     let angel = 0
     let y = 0
     let x = 0
-    let time = 0
     let projectile: myGame.wave = null
+    let time = 0
     let mySprite = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -263,6 +263,24 @@ namespace test1{
         . 4 5 . f f . . . f f . . 5 4 5 
         . 5 . . f . . . . . f . . 4 5 5 
         `)
+    myGame.setStImage(player1, myGame.stimgKind.Stand, img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 7 7 7 . . . . . . . 
+        . . . . . . 7 7 7 . . . . . . . 
+        . . . . . f . . . f . . . . . . 
+        . . . . . f . . . f . . . . . . 
+        . . . . . f . . . f . . . . . . 
+        . . . . . . f f f . . . . . . . 
+        . . . . . . . f . . . . . . . . 
+        . . . . . f f f f f . . . . . . 
+        . . . . f f . f . f f . . . . . 
+        . . . f f . . f . . f f . . . . 
+        . . . f . . . f . . . f . . . . 
+        . . . . . . . f . . . . . . . . 
+        . . . . . f f f f f . . . . . . 
+        . . . . f f . . . f f . . . . . 
+        . . . . f . . . . . f . . . . . 
+        `)
     myGame.defalutSkill(player1)
     myGame.defalutSkill(player2)
     myGame.setAbility(player2, myGame.abilityKind.def, 0.1)
@@ -338,7 +356,7 @@ namespace test1{
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 `, player3.x, player3.y, angel, 120)
-            myGame.acceToV(projectile2, time, 35, 35)
+            myGame.acceToV(projectile2, time, 30, 30)
             action10 = myGame.actionThen(myGame.actionThen(myGame.actionThen(myGame.actionThen(myGame.actionDelay(time, action9, player3, projectile2), 1, myGame.actionThen(myGame.actionThen(myGame.actionThen(myGame.actionThen(myGame.actionDelay(time, action9, player3, projectile2), 1, action3, player3, projectile2), time, action9, player3, projectile2), 1, action3, player3, projectile2), time, action9, player3, projectile2), player3, projectile2), time, action9, player3, projectile2), 1, action3, player3, projectile2), time, action9, player3, projectile2)
             angel += 60 / 4
             time += 0.5
@@ -596,4 +614,7 @@ namespace test1{
     myGame.setAction(action9, function (player3, projectile) {
         myGame.aimedshot(player3, projectile)
     })
+    let playerA = playGame.chooseCharacter(myGame.PlayerKind.Player1, 0)
+    let playerB = playGame.chooseCharacter(myGame.PlayerKind.Player2, 0)
+    myGame.overlap(playerA, playerB)
 }

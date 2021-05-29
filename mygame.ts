@@ -66,7 +66,9 @@ namespace myGame{
         //% block="击飞"
         Hitover,
         //% block="倒地"
-        Lie
+        Lie,
+        //% block="站立"
+        Stand
     }
 
     export enum bulletP{
@@ -171,7 +173,7 @@ namespace myGame{
             mySprite.setKind(SpriteKind.p1body)
             p = new Character(mySprite, controller.player1, SpriteKind.p1atk)
         }
-        else{
+        else if(kind == PlayerKind.Player2){
             mySprite.x = 155
             mySprite.setKind(SpriteKind.p2body)
             p = new Character(mySprite, controller.player2, SpriteKind.p2atk)
@@ -195,7 +197,9 @@ namespace myGame{
     //%kind.defl=PlayerKind.Player1
     //%weight=97
     export function setPlayer(p: Character, kind: PlayerKind){
+        p.mySprite.setStayInScreen(true)
         if(kind == PlayerKind.Player1){
+            p.player = controller.player1
             p.mySprite.x = 5
             p.mySprite.setKind(SpriteKind.p1body)
             p.bulletkind = SpriteKind.p1atk
@@ -203,6 +207,7 @@ namespace myGame{
             p.laspres = 2
         }
         else{
+            p.player = controller.player2
             p.mySprite.x = 155
             p.mySprite.setKind(SpriteKind.p2body)
             p.bulletkind = SpriteKind.p2atk
@@ -1649,11 +1654,11 @@ namespace myGame{
             }
             if(this.rightDOWN == 0){
                 this.rightDOWN = 1
-                this.clearcombo(300)
+                this.clearcombo(this.defence == 0 ? 300 : 500)
             }
         }
         rightup(){
-            if (this.rightDOWN == 1 || this.rightDOWN == -1) {
+            if (this.rightDOWN == 1 || this.rightDOWN == -1 || this.rightDOWN == 2) {
                 clearTimeout(this.comboclock)
                 this.comboclock = -1
                 this.clearcombo(300)
@@ -1707,14 +1712,14 @@ namespace myGame{
             }
             if(this.leftDOWN == 0){
                 this.leftDOWN = 1
-                this.clearcombo(300)
+                this.clearcombo(this.defence == 0 ? 300 : 500)
             }
         }
         //                        |->timeout(0)
         // 0 -> leftdown(1) -> leftup(2) -> leftdown(3.rush)
         //        |->timeout(-1) -> leftup(0)
         leftup(){
-            if (this.leftDOWN == 1 || this.leftDOWN == -1) {
+            if (this.leftDOWN == 1 || this.leftDOWN == -1 || this.leftDOWN == 2) {
                 clearTimeout(this.comboclock)
                 this.comboclock = -1
                 this.clearcombo(300)
@@ -1911,7 +1916,7 @@ namespace myGame{
 
     //%block
     //%group="技能设置"
-    //%blockId=shoot block="%p=variables_get(player) 发射 %img=screen_image_picker 从x $x y $y ||朝向角度 $a 速度 $s"
+    //%blockId=shoot block="%p=variables_get(player) 发射 %img=screen_image_picker 从x $x y $y ||朝向角度 $a 速率 $s"
     //%a.defl=0 s.defl=50 x.defl=0 y.defl=0 
     //%weight=80
     //%blockSetVariable=projectile
@@ -2061,7 +2066,7 @@ namespace myGame{
         let clock = setInterval(()=>{
             sprite.vx = (desx - sprite.x) / time
         }, time*10)
-        setTimeout(()=>clearInterval(clock), time*1100)
+        setTimeout(()=>clearInterval(clock), time*1000+1)
     }
 
     //%block
@@ -2072,7 +2077,7 @@ namespace myGame{
         let clock = setInterval(()=>{
             sprite.vy = (desy - sprite.y) / time
         }, time*10)
-        setTimeout(()=>clearInterval(clock), time*1100)
+        setTimeout(()=>clearInterval(clock), time*1000+1)
     }
 
     //%block
@@ -2097,7 +2102,7 @@ namespace myGame{
             sprite.ax = (vx-sprite.vx)/time
             sprite.ay = (vy-sprite.vy)/time
         }, time*10)
-        setTimeout(()=>clearInterval(clock), time*1100)
+        setTimeout(()=>clearInterval(clock), time*1000+1)
     }
     
     //%block
@@ -2155,6 +2160,9 @@ namespace myGame{
         }
         else if(k == stimgKind.Lie){
             p.lieimg = img
+        }
+        else if(k == stimgKind.Stand){
+            p.standard = img
         }
     }
     //%block
