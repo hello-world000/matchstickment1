@@ -2238,6 +2238,7 @@ namespace myGame{
     //%block
     //%group="导出人物"
     //%blockId=exportCharacter block="导出人物$p=variables_get(player) 命名为%name"
+    //%afterOnStart=true
     export function exportCharacter(p: Character, name: string){
         if(playGame.characters == undefined){
             playGame.characters = []
