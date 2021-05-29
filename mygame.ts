@@ -215,6 +215,7 @@ namespace myGame{
     //%blockId=overlap block="开始游戏 %p1=variables_get(player1) %p2=variables_get(player2)"
     //%weight=90
     export function overlap(p1: Character, p2: Character){
+        scene.setBackgroundColor(1)
         p1.startcontroll()
         p2.startcontroll()
         p1.setEnemy(p2.mySprite)
@@ -1832,7 +1833,6 @@ namespace myGame{
             this.player.moveSprite(this.mySprite, this.walkspeed, 0)
         }
     }
-    scene.setBackgroundColor(1)
 
     function shoot(p: Character, beginAngel: number, endAngel: number, n: number, speed: number, 
         x: number, y: number, img: Image, 
