@@ -4,12 +4,12 @@ namespace playGame{
 
     //%block
     //%group="游戏初始化"
-    //%blockId=createCharacter block="玩家%kind=kind 选择人物 %index"
+    //%blockId=chooseCharacter block="玩家%kind=kind 选择人物 %index"
     //%kind.defl=myGame.PlayerKind.Player1
     //%index.defl=0
     //%blockSetVariable="player"
     //%weight=98
-    export function createCharacter(kind: myGame.PlayerKind, index: number) : myGame.Character{
+    export function chooseCharacter(kind: myGame.PlayerKind, index: number) : myGame.Character{
         return characters[index].character
     }
 
