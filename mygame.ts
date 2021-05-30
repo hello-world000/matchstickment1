@@ -222,6 +222,8 @@ namespace myGame{
     //%weight=90
     export function overlap(p1: Character, p2: Character){
         scene.setBackgroundColor(1)
+        setPlayer(p1, PlayerKind.Player1)
+        setPlayer(p2, PlayerKind.Player2)
         p1.startcontroll()
         p2.startcontroll()
         p1.setEnemy(p2.mySprite)
@@ -840,18 +842,6 @@ namespace myGame{
                 if(this.attack == 2){
                     clearInterval(this.attackclock)
                 }
-                if(this.hurted != 2){
-                    this.hurted = 2
-                    clearTimeout(this.hitclock2)
-                    this.hitclock2 = setTimeout(()=>{
-                        if(this.hurted == 2){
-                            this.hurted = 1
-                            this.hits2 = this.hits
-                        }
-                        this.hitclock2 = -1
-                    }, 100)
-                }
-                //this.hurted = 1
                 animation.stopAnimation(animation.AnimationTypes.All, this.mySprite)
                 this.defence = 0
                 this.attack = 0
@@ -863,9 +853,29 @@ namespace myGame{
                         this.mySprite.vy = Math.max(this.mySprite.vy-(<wave>sprite).yspeed, -150)
                         this.mySprite.vx = sprite.x < otherSprite.x ? (<wave>sprite).xspeed : -(<wave>sprite).xspeed
                         this.mySprite.image.flipY()
+                        this.hurted = 2
+                        clearTimeout(this.hitclock2)
+                        this.hitclock2 = setTimeout(()=>{
+                            if(this.hurted == 2){
+                                this.hurted = 1
+                                this.hits2 = this.hits
+                            }
+                            this.hitclock2 = -1
+                        }, 100)
                     }
                 }
                 else{
+                    if(this.hurted != 2){
+                        this.hurted = 2
+                        clearTimeout(this.hitclock2)
+                        this.hitclock2 = setTimeout(()=>{
+                            if(this.hurted == 2){
+                                this.hurted = 1
+                                this.hits2 = this.hits
+                            }
+                            this.hitclock2 = -1
+                        }, 100)
+                    }
                     this.hits = Math.max(this.hits2+(<wave>sprite).hurted, this.hits)
                     //this.hits += (<wave>sprite).hurted //Math.max(++this.hits, (<wave>sprite).hurted)
                     this.hitrec((<wave>sprite).hitrec, this.hits-1, sprite.x < otherSprite.x, <wave>sprite)
@@ -1762,6 +1772,7 @@ namespace myGame{
             this.statusbar = statusbars.create(50, 4, StatusBarKind.Health)
             this.statusbar.positionDirection(CollisionDirection.Top)
             this.statusbar.setOffsetPadding(-66666, 0)
+            this.standard = this.mySprite.image.clone()
         }
         walkInterval = 200
         startusbarsOffset = 53
@@ -1916,17 +1927,17 @@ namespace myGame{
 
     //%block
     //%group="技能设置"
-    //%blockId=shoot block="%p=variables_get(player) 发射 %img=screen_image_picker 从x $x y $y ||朝向角度 $a 速率 $s"
-    //%a.defl=0 s.defl=50 x.defl=0 y.defl=0 
+    //%blockId=shoot block="%p=variables_get(player) 发射 %img=screen_image_picker 从x $x y $y ||朝向角度 $a 速率 $s 与发射点到距离 $d"
+    //%a.defl=0 s.defl=50 x.defl=0 y.defl=0  d.defl=0
     //%weight=80
     //%blockSetVariable=projectile
     //%inlineInputMode=inline
     export function shoot2(p: Character, img: Image, x: number, y: number, 
-    a: number = 0, s: number = 50): myGame.wave{
+    a: number = 0, s: number = 50, d: number = 0): myGame.wave{
         let bullet = <wave>sprites.createProjectileFromSide(img.clone(), 0, 0)
         reset(bullet)
-        bullet.setPosition(x, y)
         a+=180
+        bullet.setPosition(x+d*Math.cos(a/57.3), y+d*Math.sin(a/57.3))
         bullet.setVelocity(s*Math.cos(a/57.3), s*Math.sin(a/57.3))
         if(p.laspres == 1){
             bullet.vx = -bullet.vx
@@ -2098,6 +2109,8 @@ namespace myGame{
     //%blockId=accelerateToV block="加速 %p=variables_get(player) 在%time 秒内加速到 vx %dx vy %dy"
     //%inlineInputMode=inline
     export function acceToV (sprite: Sprite, time: number, vx: number, vy: number) {
+        vx = (sprite.vx^vx)<0 ? -vx : vx
+        vy = (sprite.vy^vy)<0 ? -vy : vy
         let clock = setInterval(()=>{
             sprite.ax = (vx-sprite.vx)/time
             sprite.ay = (vy-sprite.vy)/time
@@ -2237,6 +2250,13 @@ namespace myGame{
         }else if(k == abilityKind.walkspeed){
             p.walkspeed = v
         }
+    }
+
+    //%block
+    //% group="人物参数"
+    //%blockId=dirRight block="%p=variables_get(player) 朝向右"
+    export function dirRight(p: Character): boolean{
+        return p.laspres == 2
     }
 
 //=================== 导出人物 ===================

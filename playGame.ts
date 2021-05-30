@@ -13,6 +13,7 @@ namespace playGame{
         To.jumpspeed = From.jumpspeed    
         To.rushspeed = From.rushspeed    
         To.walkspeed = From.walkspeed
+        To.statusbar.value = From.statusbar.value
         To.attackA = From.attackA
         To.hand = From.hand
         To.rushA = From.rushA
